@@ -1,5 +1,4 @@
 import express from "express";
-import data from './store';
 
 
 const app = express()
@@ -16,5 +15,12 @@ app.listen(port, ()=>{
 })
 
 
-app.get('/ljubimci', (req, res)=> res.json(data.ljubimci));
+app.get('/ljubimci', (req, res)=> {
+    let ljubimci = [
+        {ime: 'Livijo',  lokacija: '-44.91244, 81.34243',    spol: 'M',   datum_nestanka: '6.6.2022',   vrsta_psa: 'Zlatni retriver'}
+    ];
+    res.status(200)
+    res.send(ljubimci);
+
+});
 
