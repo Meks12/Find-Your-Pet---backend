@@ -32,15 +32,15 @@ app.get('/ljubimac', (req, res)=> {
 });
 
 // "Hard kodirani" podaci vlasnika
-app.get('/vlasnik', (req, res) =>{
-    let vlasnik = [
+app.get('/korisnik', (req, res) =>{
+    let korisnik = [
         {jmbag:"1",ime: 'Marko', prezime: 'Livaja', broj_mobitela: "023932434", adresa_stanovanja: 'Stancija Menengeti 42', grad: 'Buje'},
         {jmbag:"2",ime: 'Toni', prezime: 'Rikardo', broj_mobitela: "091232453", adresa_stanovanja: 'Foškići 32', grad: 'Pazin'},
         {jmbag:"3",ime: 'Ludvig', prezime: 'Markon', broj_mobitela: "098122332", adresa_stanovanja: 'Opatijska cesta 1', grad: 'Opatija'},
         {jmbag:"4",ime: 'Đeni', prezime: 'Tukonić', broj_mobitela: "099222333", adresa_stanovanja: 'Lipa 33', grad: 'Poreč'}
     ];
     res.status(200)
-    res.send(vlasnik);
+    res.send(korisnik);
 });
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" od izgubljenog ljubimca
@@ -51,14 +51,14 @@ app.post('/prijavanestanka', (req,res) =>{
 });
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" vlasnika izgubljenog ljubimca
-app.post('/podacivlasnika',(req,res) =>{
+app.post('/podacikorisnika',(req,res) =>{
     console.log("Podaci",req.body);
     res.status(201);
     res.send();
 });
 
 // Ovaj "delete" sluzit ce za brisanje vlasnika u "frontendu"
-app.delete('/vlasnik/:jmbag', (req,res) =>{
+app.delete('/korisnik/:jmbag', (req,res) =>{
     console.log("Podaci",req.params.jmbag);
     res.status(200);
     res.send();
@@ -82,7 +82,7 @@ app.get('/pronadiljubimca',(req,res) =>{
     res.send(infoljubimca);
 });
 
-// Postojat ce nekakav gumb sa kojime cu podijelit određene podatke o ljubimcu
+// Postojat ce nekakav gumb sa kojime cu podijelit određene podatke o ljubimcu, nisan siguran ako je ovo ok
 app.post('/podijeli',(req,res) =>{
     let podijeli = [
     {ime:"Livijo", dob:"5", spol:"M", ime_vlasnika:"Marko", broj_mobitela:"023932434", grad:"Buje",lokacija:"-44.91244, 81.34243"},
@@ -100,7 +100,7 @@ app.patch('/ljubimac/:id', (req,res)=>{
 });
 
 // Izmjena podataka o vlasniku
-app.patch('/vlasnik/:jmbag', (req,res)=>{
+app.patch('/korisnik/:jmbag', (req,res)=>{
     console.log("Podaci",req.params.jmbag, req.body);
     res.status(200);
     res.send();
