@@ -26,22 +26,34 @@ app.get('/ljubimac', (req, res)=> {
         {id:"3",ime: 'Lana', lokacija: '23.355332, -39.213123', spol: 'Ž', datum_nestanka: '30.5.2014', vrsta_psa: 'Buldog', dob: "10", slika: "lana.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"},
         {id:"4",ime: 'Čiz', lokacija: "54.3434, -21. 4324234", spol: 'M', datum_nestanka: "30.4.2022", vrsta_psa: 'Njemački ovčar', dob: "2", slika: "čiz.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"}
     ];
-    res.status(200)
+    res.status(200);
     res.send(ljubimac);
     
 });
 
 // "Hard kodirani" podaci vlasnika
-app.get('/korisnik', (req, res) =>{
-    let korisnik = [
+app.get('/vlasnik', (req, res) =>{
+    let vlasnik = [
         {jmbag:"1",ime: 'Marko', prezime: 'Livaja', broj_mobitela: "023932434", adresa_stanovanja: 'Stancija Menengeti 42', grad: 'Buje'},
         {jmbag:"2",ime: 'Toni', prezime: 'Rikardo', broj_mobitela: "091232453", adresa_stanovanja: 'Foškići 32', grad: 'Pazin'},
         {jmbag:"3",ime: 'Ludvig', prezime: 'Markon', broj_mobitela: "098122332", adresa_stanovanja: 'Opatijska cesta 1', grad: 'Opatija'},
         {jmbag:"4",ime: 'Đeni', prezime: 'Tukonić', broj_mobitela: "099222333", adresa_stanovanja: 'Lipa 33', grad: 'Poreč'}
     ];
-    res.status(200)
+    res.status(200);
+    res.send(vlasnik);
+});
+
+
+// Dodajen korisnike zato jer korisnici mogu koristit aplikaciju da traze ljubimce bez da su ih oni izgubili
+app.get('/korisnik', (req,res) =>{
+    let korisnik = [
+        {jmbag:"5",ime: 'Ruby', prezime: 'Willow', broj_mobitela: "091343234", adresa_stanovanja: 'Belci 48', grad: 'Pazin'},
+        {jmbag:"6",ime: 'Lana', prezime: 'Tadic', broj_mobitela: "091234222", adresa_stanovanja: 'Stancija Mrak 32', grad: 'Dubrovnik'}
+    ];
+    res.status(200);
     res.send(korisnik);
 });
+
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" od izgubljenog ljubimca
 app.post('/prijavanestanka', (req,res) =>{
@@ -50,21 +62,21 @@ app.post('/prijavanestanka', (req,res) =>{
     res.send();
 });
 
-// Ova metoda služi za ispunjavanje "input text fieldov-a" vlasnika izgubljenog ljubimca
-app.post('/podacikorisnika',(req,res) =>{
+// Ova metoda služi za ispunjavanje "input text fieldov-a" vlasnika
+app.post('/podacivlasnika',(req,res) =>{
     console.log("Podaci",req.body);
     res.status(201);
     res.send();
 });
 
 // Ovaj "delete" sluzit ce za brisanje vlasnika u "frontendu"
-app.delete('/korisnik/:jmbag', (req,res) =>{
+app.delete('/vlasnik/:jmbag', (req,res) =>{
     console.log("Podaci",req.params.jmbag);
     res.status(200);
     res.send();
 });
 
-// Ovaj "delete" sluzit ce za brisanje pronađenih ljubimaca
+// Ovaj "delete" sluzit ce za brisanje ljubimaca
 app.delete('/ljubimac/:id', (req,res) =>{
     console.log("Podaci",req.params.id);
     res.status(200);
@@ -72,6 +84,7 @@ app.delete('/ljubimac/:id', (req,res) =>{
 
 });
 
+// ... 
 app.get('/pronadiljubimca',(req,res) =>{
     let infoljubimca = [
     {ime:"Livijo", dob:"5", spol:"M", ime_vlasnika:"Marko", broj_mobitela:"023932434", grad:"Buje",lokacija:"-44.91244, 81.34243"},
@@ -100,8 +113,22 @@ app.patch('/ljubimac/:id', (req,res)=>{
 });
 
 // Izmjena podataka o vlasniku
-app.patch('/korisnik/:jmbag', (req,res)=>{
+app.patch('/vlasnik/:jmbag', (req,res)=>{
     console.log("Podaci",req.params.jmbag, req.body);
+    res.status(200);
+    res.send();
+});
+
+// Podaci korisnika
+app.post('/podacikorisnika',(req,res) =>{
+    console.log("Podaci",req.body);
+    res.status(201);
+    res.send();
+});
+
+// Mijenjanje podataka korisnika
+app.patch('/korisnik/:jmbag',(req,res)=>{
+    console.log("Podaci",req.body);
     res.status(200);
     res.send();
 })
