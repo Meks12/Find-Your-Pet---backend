@@ -1,9 +1,12 @@
 import express from "express";
+import cors from "cors";
 
 
 
 const app = express()
 const port = 3000;
+
+app.use(cors())
 
 app.use(express.json());
 
@@ -18,10 +21,10 @@ app.listen(port, ()=>{
 // "Hard kodirani" podaci izgubljenih ljubimaca
 app.get('/ljubimci', (req, res)=> {
     let ljubimci = [
-        {id:"1",ime: 'Livijo', lokacija: '-44.91244, 81.34243', spol: 'M', datum_nestanka: '6.6.2022', vrsta_psa: 'Zlatni retriver', dob: "4", slika: "livijo.jpg"},
-        {id:"2",ime: 'Tara', lokacija: '-23.4343, 16.54545', spol: 'Ž', datum_nestanka: '30.5.2015', vrsta_psa: 'Border collie', dob: "14", slika: "tara.jpg"},
-        {id:"3",ime: 'Lana', lokacija: '23.355332, -39.213123', spol: 'Ž', datum_nestanka: '30.5.2014', vrsta_psa: 'Buldog', dob: "10", slika: "lana.jpg"},
-        {id:"4",ime: 'Čiz', lokacija: "54.3434, -21. 4324234", spol: 'M', datum_nestanka: "30.4.2022", vrsta_psa: 'Njemački ovčar', dob: "2", slika: "čiz.jpg"}
+        {id:"1",ime: 'Livijo', lokacija: '-44.91244, 81.34243', spol: 'M', datum_nestanka: '6.6.2022', vrsta_psa: 'Zlatni retriver', dob: "4", slika: "livijo.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"},
+        {id:"2",ime: 'Tara', lokacija: '-23.4343, 16.54545', spol: 'Ž', datum_nestanka: '30.5.2015', vrsta_psa: 'Border collie', dob: "14", slika: "tara.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"},
+        {id:"3",ime: 'Lana', lokacija: '23.355332, -39.213123', spol: 'Ž', datum_nestanka: '30.5.2014', vrsta_psa: 'Buldog', dob: "10", slika: "lana.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"},
+        {id:"4",ime: 'Čiz', lokacija: "54.3434, -21. 4324234", spol: 'M', datum_nestanka: "30.4.2022", vrsta_psa: 'Njemački ovčar', dob: "2", slika: "čiz.jpg",desc:"Ovdje dolazi dodatan opis ljubimca"}
     ];
     res.status(200)
     res.send(ljubimci);
@@ -52,11 +55,19 @@ app.post('/podacivlasnika',(req,res) =>{
     console.log("Podaci",req.body);
     res.status(201);
     res.send();
-})
+});
 
 // Ovaj "delete" sluzit ce za brisanje vlasnika u "frontendu"
 app.delete('/vlasnici/:jmbag', (req,res) =>{
     console.log("Podaci",req.params.jmbag);
     res.status(200);
     res.send();
-})
+});
+
+// Ovaj "delete" sluzit ce za brisanje pronađenih ljubimaca
+app.delete('/ljubimci/:id', (req,res) =>{
+    console.log("Podaci",req.params.id);
+    res.status(200);
+    res.send();
+
+});
