@@ -92,3 +92,16 @@ app.post('/podijeli',(req,res) =>{
     res.status(201);
     res.send(podijeli);
 });
+// Izmjena podataka o ljubimcu
+app.patch('/ljubimac/:id', (req,res)=>{
+   console.log("Podaci",req.params.id, req.body);
+    res.status(200);
+    res.send();
+});
+
+// Izmjena podataka o vlasniku
+app.patch('/vlasnik/:jmbag', (req,res)=>{
+    console.log("Podaci",req.params.jmbag, req.body);
+    res.status(200);
+    res.send();
+})
