@@ -70,9 +70,9 @@ app.get('/korisnik', (req,res) =>{
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" od izgubljenog ljubimca
 app.post('/prijavanestanka', (req,res) =>{
-    let poruka = req.body;
-    console.log(poruka)
-  //  console.log("Podaci",req.body);
+   // let poruka = req.body;
+ //   console.log(poruka)
+     console.log("Podaci",req.body);
     res.status(201);
     res.send();
 
