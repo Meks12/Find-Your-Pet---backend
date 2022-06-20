@@ -12,9 +12,6 @@ let db = null
 export default () =>{
     return new Promise((resolve, reject) =>{
 
-        if (db && client.isConnected()){
-            resolve(db)
-        }
 
         client.connect(err =>{
             if (err) {
@@ -27,4 +24,4 @@ export default () =>{
             }
         })
     })
-}
+} 

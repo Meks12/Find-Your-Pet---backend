@@ -18,7 +18,7 @@ app.post('/prijavanestanka', async (req,res) =>{
     let results = await cursor.toArray()
 
     res.json(results)
-})
+}) 
 
 
 // HARDKODANI BEKEND OD LINIJE 26 NA DALJE
