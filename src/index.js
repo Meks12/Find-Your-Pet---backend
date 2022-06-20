@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-
+import connect from './db.js'
 
 
 const app = express()
@@ -9,6 +9,19 @@ const port = 3000;
 app.use(cors())
 
 app.use(express.json());
+
+
+app.post('/prijavanestanka', async (req,res) =>{
+    let db = await connect()
+
+    let cursor = await db.collection("prijavanestanka").find().sort({postedAt: -1})
+    let results = await cursor.toArray()
+
+    res.json(results)
+})
+
+
+// HARDKODANI BEKEND OD LINIJE 26 NA DALJE
 
 app.get("/",(req, res)=>{
     res.send("Hello!");
@@ -57,9 +70,12 @@ app.get('/korisnik', (req,res) =>{
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" od izgubljenog ljubimca
 app.post('/prijavanestanka', (req,res) =>{
-    console.log("Podaci",req.body);
+    let poruka = req.body;
+    console.log(poruka)
+  //  console.log("Podaci",req.body);
     res.status(201);
     res.send();
+
 });
 
 // Ova metoda služi za ispunjavanje "input text fieldov-a" vlasnika
@@ -131,4 +147,4 @@ app.patch('/korisnik/:jmbag',(req,res)=>{
     console.log("Podaci",req.body);
     res.status(200);
     res.send();
-})
+});
